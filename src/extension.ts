@@ -15,19 +15,19 @@ import {
     showJudge,
 } from "./commands/show";
 import { globalState } from "./globalState";
-import JudgeViewProvider, {
-    judgeViewProvider,
-} from "./webview/judgeViewProvider";
-import { getRetainWebviewContextPref } from "./cph/preferences";
+// import JudgeViewProvider, {
+//     judgeViewProvider,
+// } from "./webview/judgeViewProvider";
+// import { getRetainWebviewContextPref } from "./cph/preferences";
 import { openContestUrl } from "./utils/urlUtils";
-import {
-    checkLaunchWebview,
-    editorChanged,
-    editorClosed,
-} from "./webview/editorChange";
-import { setupCompanionServer } from "./cph/companion";
-import runTestCases from "./cph/runTestCases";
-import { submitToCodeForces } from "./cph/submit";
+// import {
+//     checkLaunchWebview,
+//     editorChanged,
+//     editorClosed,
+// } from "./webview/editorChange";
+// import { setupCompanionServer } from "./cph/companion";
+// import runTestCases from "./cph/runTestCases";
+// import { submitToCodeForces } from "./cph/submit";
 import { addFavorite, removeFavorite } from "./commands/star";
 import { saveSolutionDetails } from "./commands/solutions";
 import { deleteBrowsersFolderIfExists } from "./utils/fileUtils";
@@ -57,15 +57,15 @@ export function activate(context: vscode.ExtensionContext) {
                 codeforcesTreeItemDecorationProvider,
             ),
             codeforcesTreeView,
-            vscode.window.registerWebviewViewProvider(
-                JudgeViewProvider.viewType,
-                judgeViewProvider,
-                {
-                    webviewOptions: {
-                        retainContextWhenHidden: getRetainWebviewContextPref(),
-                    },
-                },
-            ),
+            // vscode.window.registerWebviewViewProvider(
+            //     JudgeViewProvider.viewType,
+            //     judgeViewProvider,
+            //     {
+            //         webviewOptions: {
+            //             retainContextWhenHidden: getRetainWebviewContextPref(),
+            //         },
+            //     },
+            // ),
             vscode.commands.registerCommand("codeforces.addhandle", () =>
                 addHandle(),
             ),
@@ -82,12 +82,12 @@ export function activate(context: vscode.ExtensionContext) {
             vscode.commands.registerCommand("codeforces.searchContest", () =>
                 searchContest(),
             ),
-            vscode.commands.registerCommand("codeforces.testSolution", () =>
-                runTestCases(),
-            ),
-            vscode.commands.registerCommand("codeforces.submitSolution", () =>
-                submitToCodeForces(),
-            ),
+            // vscode.commands.registerCommand("codeforces.testSolution", () =>
+            //     runTestCases(),
+            // ),
+            // vscode.commands.registerCommand("codeforces.submitSolution", () =>
+            //     submitToCodeForces(),
+            // ),
             vscode.commands.registerCommand("codeforces.pickOne", () =>
                 pickOne(),
             ),
@@ -121,25 +121,25 @@ export function activate(context: vscode.ExtensionContext) {
             ),
         );
 
-        checkLaunchWebview();
+        // checkLaunchWebview();
 
-        vscode.workspace.onDidCloseTextDocument((e) => {
-            editorClosed(e);
-        });
+        // vscode.workspace.onDidCloseTextDocument((e) => {
+        //     editorClosed(e);
+        // });
 
-        vscode.window.onDidChangeActiveTextEditor((e) => {
-            editorChanged(e);
-        });
+        // vscode.window.onDidChangeActiveTextEditor((e) => {
+        //     editorChanged(e);
+        // });
 
-        vscode.window.onDidChangeVisibleTextEditors((editors) => {
-            if (editors.length === 0) {
-                judgeViewProvider.extensionToJudgeViewMessage({
-                    command: "new-problem",
-                    problem: undefined,
-                });
-            }
-        });
-        setupCompanionServer();
+        // vscode.window.onDidChangeVisibleTextEditors((editors) => {
+        //     if (editors.length === 0) {
+        //         judgeViewProvider.extensionToJudgeViewMessage({
+        //             command: "new-problem",
+        //             problem: undefined,
+        //         });
+        //     }
+        // });
+        // setupCompanionServer();
 
         saveSolutionDetails();
 
@@ -149,4 +149,4 @@ export function activate(context: vscode.ExtensionContext) {
     }
 }
 
-export function deactivate() {}
+export function deactivate() { }
