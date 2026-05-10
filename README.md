@@ -1,3 +1,11 @@
+# This version removes Integrated CPH
+_____________________________________
+_____________________________________
+_____________________________________
+_____________________________________
+_____________________________________
+_____________________________________
+
 # Codeforces VS Code Extension
 
 ![Codeforces VSCode Extension Preview](https://raw.githubusercontent.com/codewithsathya/vscode-codeforces/refs/heads/main/resources/docs/preview.png)
