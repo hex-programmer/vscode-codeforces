@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import * as http from "http";
 
 import {
     Category,
@@ -16,7 +17,7 @@ import { Problem } from "../cph/types";
 import { codeforcesProblemParser } from "../parsers/codeforcesProblemParser";
 import { getCsesProblemUrl, getProblemUrl } from "../utils/urlUtils";
 import { csesProblemParser } from "../parsers/csesProblemParser";
-import { handleNewProblem } from "../cph/companion";
+// import { handleNewProblem } from "../cph/companion";
 import { showSolutionLinks } from "../utils/settingUtils";
 import { globalState } from "../globalState";
 import { codeforcesChannel } from "../codeforcesChannel";
@@ -84,7 +85,23 @@ export async function showJudge(node: CodeforcesNode, html: string) {
         );
     }
     if (problem) {
-        handleNewProblem(problem, node, html);
+        // handleNewProblem(problem, node, html);
+        const body = JSON.stringify(problem);
+        const req = http.request({
+            hostname: "localhost",
+            port: 27121,
+            path: "/",
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Content-Length": Buffer.byteLength(body),
+            },
+        });
+        req.on("error", () => {
+            vscode.window.showErrorMessage("Could not reach CPH. Is it installed and is a folder open?");
+        });
+        req.write(body);
+        req.end();
     }
 }
 
@@ -129,7 +146,7 @@ export async function pickOne(): Promise<void> {
                 );
                 const randomProblem: IProblem =
                     filteredProblems[
-                        Math.floor(Math.random() * filteredProblems.length)
+                    Math.floor(Math.random() * filteredProblems.length)
                     ];
                 previewProblem(randomProblem);
             }
