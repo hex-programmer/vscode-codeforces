@@ -1,5 +1,22 @@
 # This version removes Integrated CPH
 _____________________________________
+Download [this .VSIX file](https://github.com/hex-programmer/vscode-codeforces/blob/main/output/codeforces-pro-1.3.3.vsix) and from your vscode extension tab, use `Install from VSIX` to install it.
+
+Or Build on your own using this
+- Using bun
+  ```
+  del /F /Q .\dist && del /F /Q .\output && bun i && node build-extension.mjs && if not exist output mkdir output && bunx @vscode/vsce package --out output\codeforces-pro-1.3.3.vsix
+  ```
+- Using npm
+  ```
+  del /F /Q .\dist && del /F /Q .\output && npm install && node build-extension.mjs && if not exist output mkdir output && npx @vscode/vsce package --out output\codeforces-pro-1.3.3.vsix
+  ```
+- Using pnpm
+  ```
+  del /F /Q .\dist && del /F /Q .\output && pnpm install && node build-extension.mjs && if not exist output mkdir output && pnpm dlx @vscode/vsce package --out output\codeforces-pro-1.3.3.vsix
+  ```
+And use the `output/.VSIX` file in vscode
+
 _____________________________________
 _____________________________________
 _____________________________________
